@@ -1,0 +1,22 @@
+{
+  "name": "hackers-diet",
+  "version": "1.0.0",
+  "description": "Human API backed Hacker's Diet",
+  "main": "server/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dting/hackers-diet.git"
+  },
+  "keywords": [
+    "humanapi"
+  ],
+  "author": "dennisting@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dting/hackers-diet/issues"
+  },
+  "homepage": "https://github.com/dting/hackers-diet#readme"
+}
