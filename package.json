@@ -4,6 +4,7 @@
   "description": "Human API backed Hacker's Diet",
   "main": "server/app.js",
   "scripts": {
+    "start": "nf start -j Procfile.dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +19,34 @@
   "bugs": {
     "url": "https://github.com/dting/hackers-diet/issues"
   },
-  "homepage": "https://github.com/dting/hackers-diet#readme"
+  "homepage": "https://github.com/dting/hackers-diet#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "cors": "^2.8.1",
+    "errorhandler": "^1.4.3",
+    "express": "^4.14.0",
+    "express-jwt": "^5.0.0",
+    "helmet": "^2.3.0",
+    "jsonwebtoken": "^7.1.9",
+    "lodash": "^4.16.2",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-google-oauth20": "^1.0.0",
+    "sequelize": "^3.24.3",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.7.0",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.3.0",
+    "foreman": "^2.0.0",
+    "sqlite3": "^3.1.4"
+  },
+  "engines": {
+    "node": "6.3.1"
+  }
 }
