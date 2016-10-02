@@ -1,1 +1,1 @@
-api: nodemon server/app.js
+api: nodemon --watch server server/app.js

@@ -33,6 +33,8 @@ module.exports = function configExpress(app) {
   app.use(bodyParser.urlencoded({ extended: true }));
 
   if (app.get('env') === 'development') {
+    require('./webpack')(app); // eslint-disable global-require
+
     app.use(errorHandler());
   }
 };
