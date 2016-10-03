@@ -15,7 +15,8 @@ module.exports = function configExpress(app) {
   app.set('ip', config.ip);
 
   if (app.get('env') === 'development') {
-    app.use(express.static(path.join(config.root, '.tmp')));
+    app.set('tempPath', path.join(config.root, '.tmp'));
+    app.use(express.static(app.get('tempPath')));
     app.set('clientPath', path.join(config.root, 'client'));
   } else {
     app.set('clientPath', path.join(config.root, 'public'));

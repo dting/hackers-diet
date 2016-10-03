@@ -14,7 +14,7 @@ module.exports = {
     './index.jsx',
   ],
   output: {
-    path: path.resolve(__dirname, '../.tmp'),
+    path: path.resolve(__dirname, './.tmp'),
     publicPath: '/',
     filename: 'bundle.js',
   },
@@ -22,7 +22,6 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      'process.env.GOOGLE_ID': JSON.stringify(process.env.GOOGLE_ID || 'GOOGLE_ID'),
     }),
     new ExtractTextPlugin('style.css', {
       allChunks: true,
@@ -35,26 +34,26 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
   },
   module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: ['babel-loader'],
-      },
-      {
-        test: /\.scss$/,
-        loaders: [
-          ExtractTextPlugin.extract('style'),
-          'css?sourceMap',
-          'postcss',
-          'sass?sourceMap',
-        ],
-      },
-      {
-        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-        loader: 'url?prefix=font/&limit=5000',
-      },
-    ],
+    loaders: [{
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      loaders: ['babel-loader'],
+    }, {
+      test: /\.scss$/,
+      loaders: [
+        ExtractTextPlugin.extract('style'),
+        'css?sourceMap',
+        'postcss',
+        'resolve-url',
+        'sass?sourceMap',
+      ],
+    }, {
+      test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+      loader: 'url?prefix=font/&limit=5000',
+    }, {
+      test: /\.(png|jpg|jpeg|gif|woff)$/,
+      loader: 'url-loader?limit=8192',
+    }],
   },
   postcss: () => [autoprefixer],
 };

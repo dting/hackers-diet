@@ -1,3 +1,5 @@
+@import '../node_modules/normalize.css/normalize.css';
+
 body {
   margin: 0;
   font-family: 'Avenir', 'Helvetica Neue', 'Helvetica', sans-serif;
@@ -28,3 +30,5 @@ body {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
+@import './containers/containers';

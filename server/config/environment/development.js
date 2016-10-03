@@ -1,11 +1,13 @@
 module.exports = {
   sequelize: {
-    uri: 'sqlite://',
+    uri: 'postgres://localhost:5432/hackersdiet-dev',
     options: {
       logging: false,
-      storage: 'dev.sqlite',
-      define: {
-        timestamps: false,
+      dialect: 'postgres',
+      pool: {
+        max: 5,
+        min: 0,
+        idle: 10000,
       },
     },
   },

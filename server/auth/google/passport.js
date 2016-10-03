@@ -18,7 +18,7 @@ module.exports.setup = function setup(User, config) {
           name: profile.displayName,
           email: profile.emails[0].value,
           username: profile.emails[0].value.split('@')[0],
-          provider: 'google',
+          googleId: profile.id,
           google: profile._json,
         });
         return newUser.save()

@@ -11,8 +11,19 @@ module.exports = function configRoutes(app) {
     .get(errors[404]);
 
   // All other routes should redirect to the index.html
-  app.route('/*')
-    .get((req, res) => {
-      res.sendFile(path.resolve(`${app.get('clientPath')}/index.html`));
+  if (app.get('env') === 'development') {
+    const { devMiddleware } = require('./webpack');
+    const indexPath = `${app.get('tempPath')}/index.html`;
+    app.use('*', function (req, res, next) {
+      res.set('content-type','text/html');
+      res.send(devMiddleware.fileSystem.readFileSync(indexPath));
+      res.end();
     });
+  } else {
+    app.route('/*')
+      .get((req, res) => {
+        res.sendFile(`${app.get('clientPath')}/index.html`);
+      });
+  }
+
 };

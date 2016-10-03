@@ -16,9 +16,6 @@ module.exports = function userModel(sequelize, DataTypes) {
         isEmail: true,
       },
     },
-    provider: DataTypes.STRING,
-    facebook: DataTypes.JSON,
-    twitter: DataTypes.JSON,
-    google: DataTypes.JSON,
+    google: DataTypes.JSONB,
   });
 };

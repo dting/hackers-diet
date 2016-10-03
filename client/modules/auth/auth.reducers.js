@@ -1,22 +1,19 @@
 import { types } from './';
 
 const initialState = {
-  _id: null,
-  username: null,
-  provider: null,
-  google: null,
+  token: null,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case types.USER_SET:
+    case types.AUTH_UNSET_TOKEN:
       return {
         ...initialState,
-        ...action.response,
       };
-    case types.USER_UNSET:
+    case types.AUTH_SET_TOKEN:
       return {
-        ...initialState,
+        ...state,
+        token: action.token,
       };
     default:
       return state;
