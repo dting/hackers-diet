@@ -4,36 +4,31 @@ import { connect } from 'react-redux';
 
 import { actions as userActions } from '../../modules/user';
 
-const connectHandler = function connectHandler({ jwtToken, publicToken, userConnect, userId }) {
-  const options = {
+const connectHandler = function connectHandler(jwtToken, publicToken, userConnect, userId) {
+  return () => HumanConnect.open({
     clientUserId: encodeURIComponent(userId),
     clientId: process.env.HUMAN_API_ID,
     publicToken: publicToken || '',
-    finish: (err, sessionTokenObject) => {
-      if (!err) {
-        userConnect(jwtToken, sessionTokenObject);
-      }
-    },
-  };
-  return () => HumanConnect.open(options);
+    finish: (err, sessionTokenObject) => !err && userConnect(jwtToken, sessionTokenObject),
+  });
 };
 
-const Connect = props => (
+const Connect = ({ jwtToken, publicToken, userConnect, userId }) => (
   <div className="page-wrapper connect">
     <h1>Connect</h1>
     <input
       type="image"
       src={require('./blue.png')}
-      onClick={connectHandler(props)}
+      onClick={connectHandler(jwtToken, publicToken, userConnect, userId)}
       className="connect-btn"
     />
   </div>
 );
 
 Connect.propTypes = {
-  jwtToken: PropTypes.string,
+  jwtToken: PropTypes.string.isRequired,
   publicToken: PropTypes.string,
-  userConnect: PropTypes.func,
+  userConnect: PropTypes.func.isRequired,
   userId: PropTypes.number,
 };
 

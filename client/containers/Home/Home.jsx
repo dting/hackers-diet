@@ -4,29 +4,19 @@ import { connect } from 'react-redux';
 
 import { actions as authActions } from '../../modules/auth';
 
-const Home = props => (
+const Home = ({ logout }) => (
   <div className="page-wrapper">
     <h1>Home</h1>
-    <div>{props.user.name}</div>
-    <button onClick={props.actions.logout}>Logout</button>
+    <button onClick={logout}>Logout</button>
   </div>
 );
 
 Home.propTypes = {
-  actions: PropTypes.shape({
-    logout: PropTypes.func.require,
-  }),
-  user: PropTypes.shape({
-    name: PropTypes.string.require,
-  }),
+  logout: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
-});
-
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(authActions, dispatch),
+  logout: bindActionCreators(authActions.logout, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);
