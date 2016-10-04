@@ -15,13 +15,15 @@ actions.connect = function connect(token, data) {
 };
 
 actions.me = function me(token) {
-  const promise = fetch('/api/users/me', apiUtil.jsonGetOptions(token))
-    .then(apiUtil.checkStatus)
-    .then(apiUtil.parseJson);
+  return (dispatch) => {
+    const promise = fetch('/api/users/me', apiUtil.jsonGetOptions(token))
+      .then(apiUtil.checkStatus)
+      .then(apiUtil.parseJson);
 
-  return {
-    type: types.USER_CHECK,
-    payload: promise,
+    return dispatch({
+      type: types.USER_CHECK,
+      payload: promise,
+    });
   };
 };
 

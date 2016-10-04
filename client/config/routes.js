@@ -11,16 +11,37 @@ const routes = {
   getRoutes(store) {
     store.dispatch(authActions.setToken(cookie.load('token') || null));
 
-    const authRequired = function requireAuth(nextState, replace) {
+    const authRequired = function requireAuth(nextState, replace, done) {
       const { auth, user } = store.getState();
+      if (auth.token && !user._id) {
+        return store.dispatch(userActions.me(auth.token))
+          .then(() => done())
+          .catch(() => store.dispatch(authActions.logout(replace)))
+          .then(done);
+      }
       if (!auth.token) {
-        return store.dispatch(authActions.logout(replace));
+        store.dispatch(authActions.logout(replace));
+      }
+      return done();
+    };
+
+    const notAuthed = function notAuthed(nextState, replace, done) {
+      const { auth, user } = store.getState();
+      if (!auth.token && !user._id) {
+        return done();
+      }
+      if (!auth.token) {
+        store.dispatch(authActions.logout(replace));
+        return done();
       }
       if (!user._id) {
         return store.dispatch(userActions.me(auth.token))
-          .catch(() => store.dispatch(authActions.logout(replace)));
+          .then(() => replace('/'))
+          .catch(() => store.dispatch(authActions.logout(replace)))
+          .then(done);
       }
-      return undefined;
+      replace('/');
+      return done();
     };
 
     return (
@@ -29,7 +50,7 @@ const routes = {
           <IndexRoute component={Home} />
           <Route path="connect" component={Connect} />
         </Route>
-        <Route path="login" component={Login} />
+        <Route path="login" component={Login} onEnter={notAuthed} />
       </Route>
     );
   },
