@@ -1,12 +1,16 @@
-import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import React, { PropTypes } from 'react';
 
 import { actions as authActions } from '../../modules/auth';
 
 const Home = ({ logout }) => (
-  <div className="page-wrapper">
+  <div className="page-wrapper home">
     <h1>Home</h1>
+    <div className="connect-info">
+      <Link to={'/connect'}>Connect</Link>
+    </div>
     <button onClick={logout}>Logout</button>
   </div>
 );

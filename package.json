@@ -5,6 +5,7 @@
   "main": "server/app.js",
   "scripts": {
     "start": "nf start -j Procfile.dev",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,5 +1,3 @@
-const path = require('path');
-
 const errors = require('../components/errors');
 
 module.exports = function configRoutes(app) {
@@ -13,9 +11,10 @@ module.exports = function configRoutes(app) {
   // All other routes should redirect to the index.html
   if (app.get('env') === 'development') {
     const { devMiddleware } = require('./webpack');
+
     const indexPath = `${app.get('tempPath')}/index.html`;
-    app.use('*', function (req, res, next) {
-      res.set('content-type','text/html');
+    app.use('*', (req, res) => {
+      res.set('content-type', 'text/html');
       res.send(devMiddleware.fileSystem.readFileSync(indexPath));
       res.end();
     });
@@ -25,5 +24,4 @@ module.exports = function configRoutes(app) {
         res.sendFile(`${app.get('clientPath')}/index.html`);
       });
   }
-
 };
