@@ -15,7 +15,7 @@ const accessTokenHeader = function accessTokenHeader(req, res, next) {
 };
 
 const populateUser = function populateUser(req, res, next) {
-  User.find({ where: { _id: req.user._id } })
+  return User.findById(req.user._id)
     .then((user) => {
       if (!user) {
         return res.status(401).end();

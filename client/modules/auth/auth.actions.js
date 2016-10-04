@@ -6,12 +6,16 @@ import { actions as userActions } from '../user';
 
 const actions = {};
 
-actions.logout = function logout() {
+actions.logout = function logout(cb) {
   return (dispatch) => {
     cookie.remove('token');
     dispatch(userActions.unset());
     dispatch(actions.unsetToken());
-    dispatch(replace('/login'));
+    if (typeof cb === 'function') {
+      cb('/login');
+    } else {
+      dispatch(replace('/login'));
+    }
   };
 };
 

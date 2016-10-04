@@ -1,37 +1,23 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { actions as authActions } from '../../modules/auth';
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.logout = this.logout.bind(this);
-  }
-
-  logout() {
-    this.props.actions.logout();
-  }
-
-  render() {
-    return (
-      <div className="page-wrapper">
-        <h1>Home</h1>
-        <div>{JSON.stringify(this.props.user.name)}</div>
-        <button onClick={this.logout}>Logout</button>
-      </div>
-    );
-  }
-}
+const Home = props => (
+  <div className="page-wrapper">
+    <h1>Home</h1>
+    <div>{props.user.name}</div>
+    <button onClick={props.actions.logout}>Logout</button>
+  </div>
+);
 
 Home.propTypes = {
-  logout: PropTypes.func,
   actions: PropTypes.shape({
-    logout: PropTypes.func,
+    logout: PropTypes.func.require,
   }),
   user: PropTypes.shape({
-    name: PropTypes.string,
+    name: PropTypes.string.require,
   }),
 };
 

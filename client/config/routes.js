@@ -3,30 +3,32 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from '../App';
-import { Home, Login } from '../containers';
+import { Home, Login, Connect } from '../containers';
 import { actions as authActions } from '../modules/auth';
 import { actions as userActions } from '../modules/user';
 
 const routes = {
   getRoutes(store) {
+    store.dispatch(authActions.setToken(cookie.load('token') || null));
 
     const authRequired = function requireAuth(nextState, replace) {
-      const token = cookie.load('token') || null;
-      store.dispatch(authActions.setToken(token));
-      if (!token) {
-        store.dispatch(userActions.unset());
-        return replace('/login');
+      const { auth, user } = store.getState();
+      if (!auth.token) {
+        return store.dispatch(authActions.logout(replace));
       }
-      return store.dispatch(userActions.me(token))
-        .catch(() => {
-          cookie.remove('token');
-          return replace('/login');
-        });
-    }
+      if (!user._id) {
+        return store.dispatch(userActions.me(auth.token))
+          .catch(() => store.dispatch(authActions.logout(replace)));
+      }
+      return undefined;
+    };
 
     return (
       <Route path="/" component={App}>
-        <IndexRoute component={Home} onEnter={authRequired} />
+        <Route onEnter={authRequired}>
+          <IndexRoute component={Home} />
+          <Route path="connect" component={Connect} />
+        </Route>
         <Route path="login" component={Login} />
       </Route>
     );

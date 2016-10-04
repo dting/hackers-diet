@@ -22,6 +22,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.HUMAN_API_ID': JSON.stringify(process.env.HUMAN_API_ID || ''),
     }),
     new ExtractTextPlugin('style.css', {
       allChunks: true,

@@ -17,5 +17,16 @@ module.exports = function userModel(sequelize, DataTypes) {
       },
     },
     google: DataTypes.JSONB,
+    accessToken: DataTypes.STRING(300),
+    humanId: DataTypes.STRING,
+    publicToken: DataTypes.STRING,
+  }, {
+    instanceMethods: {
+      toJSON() {
+        const values = this.get();
+        delete values.accessToken;
+        return values;
+      },
+    },
   });
 };

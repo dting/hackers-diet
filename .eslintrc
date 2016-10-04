@@ -23,5 +23,6 @@
     }
   },
   "globals": {
+    "HumanConnect": 1,
   }
 }
