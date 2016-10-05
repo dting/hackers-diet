@@ -1,6 +1,12 @@
-.heading,
-.info,
 .login {
+  display        : flex;
+  flex           : 1;
+  flex-direction : column;
+}
+
+.actions,
+.heading,
+.info {
   display         : flex;
   padding         : 15px;
   align-items     : center;
@@ -16,18 +22,27 @@
   line-height : 25px;
 }
 
+.demo-btn,
 .google-btn {
-  display       : inline-block;
-  width         : 190px;
-  color         : #444;
-  border        : thin solid #888;
-  border-radius : 5px;
-  background    : white;
-  box-shadow    : 1px 1px 1px grey;
-  white-space   : nowrap;
+  display         : flex;
+  position        : relative;
+  width           : 190px;
+  height          : 44px;
+  margin-bottom   : 5px;
+  color           : #444;
+  border          : thin solid #888;
+  border-radius   : 5px;
+  background      : white;
+  box-shadow      : 1px 1px 1px grey;
+  text-decoration : none;
+  align-items     : center;
+  justify-content : center;
+  white-space     : nowrap;
 
   .icon {
     display        : inline-block;
+    position       : absolute;
+    left           : 5px;
     width          : 42px;
     height         : 42px;
     background     : url('./g-normal.png') transparent 5px 50% no-repeat;
@@ -43,7 +58,6 @@
                      sans-serif;
     font-size      : 14px;
     font-weight    : bold;
-    /* Use the Roboto font that is loaded in the <head> */
   }
 
   &:hover {

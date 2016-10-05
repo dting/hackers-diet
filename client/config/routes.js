@@ -3,7 +3,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import Root from '../Root';
-import { App, Home, Login, Connect } from '../containers';
+import { App, Demo, Home, Login, Connect } from '../containers';
 import { actions as authActions } from '../modules/auth';
 import { actions as userActions } from '../modules/user';
 
@@ -50,6 +50,7 @@ const routes = {
           <IndexRoute component={Home} />
           <Route path="connect" component={Connect} />
         </Route>
+        <Route path="demo" component={Demo} />
         <Route path="login" component={Login} onEnter={notAuthed} />
       </Route>
     );
