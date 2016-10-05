@@ -1,14 +1,15 @@
 @import "./NavItem/navitem";
 
 .navbar {
-  display    : flex;
-  align-self : stretch;
+  display     : flex;
+  align-self  : stretch;
+  flex-shrink : 0;
 
   .nav {
     display : flex;
     flex    : 1;
   }
-
+  
   .brand,
   .link,
   .logout-btn {

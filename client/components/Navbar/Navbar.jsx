@@ -6,7 +6,7 @@ import React, { PropTypes } from 'react';
 import { actions as authActions } from '../../modules/auth';
 import { NavItem } from './';
 
-const Navbar = ({ logout, path }) => (
+const Navbar = ({ children, logout, path }) => (
   <nav className="navbar">
     <NavItem match="/" path={path}>
       <Link className="brand" to="/">Hacker&apos;s Diet</Link>
@@ -15,6 +15,7 @@ const Navbar = ({ logout, path }) => (
       <NavItem match="/connect" path={path}>
         <Link className="link" to="/connect">Connect</Link>
       </NavItem>
+      {children}
     </div>
     <NavItem>
       <button className="logout-btn" onClick={logout}>Logout</button>
@@ -25,6 +26,7 @@ const Navbar = ({ logout, path }) => (
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
   path: PropTypes.string,
+  children: PropTypes.node,
 };
 
 const mapDispatchToProps = dispatch => ({

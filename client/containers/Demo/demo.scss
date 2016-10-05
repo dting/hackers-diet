@@ -1,0 +1,46 @@
+.demo {
+  display        : flex;
+  flex           : 1;
+  flex-direction : column;
+}
+
+.demo-content {
+  display : flex;
+  flex    : 1;
+
+  .main-panel,
+  .side-panel {
+    display        : flex;
+    flex-direction : column;
+    padding: 15px;
+    overflow: hidden;
+  }
+
+  .main-panel {
+    flex: 1;
+  }
+
+  .header {
+    margin  : 0;
+    margin-bottom: 15px;
+  }
+
+  .table {
+    display        : flex;
+    overflow       : auto;
+    flex-direction : column;
+
+    .row {
+      display    : flex;
+      min-height : 25px;
+
+      .cell {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        height: 30px;
+        margin-right: 25px;
+      }
+    }
+  }
+}

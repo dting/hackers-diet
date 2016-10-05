@@ -2,6 +2,7 @@ const errors = require('../components/errors');
 
 module.exports = function configRoutes(app) {
   app.use('/api/users', require('../api/user'));
+  app.use('/api/demos', require('../api/demo'));
   app.use('/auth', require('../auth'));
 
   // All undefined asset or api routes should return a 404
