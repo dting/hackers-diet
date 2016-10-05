@@ -2,8 +2,8 @@ import cookie from 'react-cookie';
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from '../App';
-import { Home, Login, Connect } from '../containers';
+import Root from '../Root';
+import { App, Home, Login, Connect } from '../containers';
 import { actions as authActions } from '../modules/auth';
 import { actions as userActions } from '../modules/user';
 
@@ -45,8 +45,8 @@ const routes = {
     };
 
     return (
-      <Route path="/" component={App}>
-        <Route onEnter={authRequired}>
+      <Route path="/" component={Root}>
+        <Route component={App} onEnter={authRequired}>
           <IndexRoute component={Home} />
           <Route path="connect" component={Connect} />
         </Route>

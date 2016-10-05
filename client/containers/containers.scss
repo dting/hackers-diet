@@ -1,3 +1,4 @@
-@import './Connect/connect';
-@import './Home/home';
-@import './Login/login';
+@import "./App/app",
+        "./Connect/connect",
+        "./Home/home",
+        "./Login/login";

@@ -1,15 +1,15 @@
 import React from 'react';
 
-import './app.scss';
+import './root.scss';
 
-const App = ({ children }) => (
+const Root = ({ children }) => (
   <div className="page-container">
     {children}
   </div>
 );
 
-App.propTypes = {
+Root.propTypes = {
   children: React.PropTypes.node,
 };
 
-export default App;
+export default Root;

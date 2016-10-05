@@ -1,0 +1,35 @@
+.nav-item {
+  display         : flex;
+  position        : relative;
+  color           : black;
+  outline         : none;
+  text-decoration : none;
+  align-items     : center;
+  justify-content : center;
+  cursor          : pointer;
+
+  &.active,
+  &:hover {
+    color : #3186e4;
+  }
+
+  &::after {
+    content          : '';
+    position         : absolute;
+    top              : 0;
+    right            : 0;
+    left             : 0;
+    height           : 4px;
+    opacity          : 0;
+    background-color : #3186e4;
+    transition       : all 0.2s linear;
+  }
+
+  &.active::after {
+    opacity : 0.5;
+  }
+
+  &:hover::after {
+    opacity : 1;
+  }
+}

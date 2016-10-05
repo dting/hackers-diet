@@ -19,4 +19,4 @@ ReactDOM.render((
       {routes.getRoutes(store)}
     </Router>
   </Provider>
-), document.getElementById('app'));
+), document.getElementById('root'));

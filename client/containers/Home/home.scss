@@ -1,9 +1,9 @@
 .home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display        : flex;
+  align-items    : center;
+  flex-direction : column;
 
   .connect-info {
-    padding: 15px;
+    padding : 15px;
   }
 }
