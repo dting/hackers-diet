@@ -1,0 +1,36 @@
+.navbar {
+  display: flex;
+  align-self: stretch;
+  .nav {
+    display: flex;
+  }
+  .brand {
+    color: #3186e4;
+  }
+  .brand,
+  .item,
+  .link {
+    position: relative;
+    padding: 15px;
+    text-decoration: none;
+    &.active::after,
+    &:hover::after {
+      position: absolute;
+      padding: 0;
+      content: "";
+      height: 2px;
+      background-color: #3186e4;
+      left: 15px;
+      right: 15px;
+      bottom: 5px;
+    }
+  }
+  .spacer {
+    flex: 1;
+  }
+  .logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+}

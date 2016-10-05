@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { Navbar } from '../../components';
 import { actions as userActions } from '../../modules/user';
 
 const connectHandler = function connectHandler(jwtToken, publicToken, userConnect, userId) {
@@ -15,6 +16,7 @@ const connectHandler = function connectHandler(jwtToken, publicToken, userConnec
 
 const Connect = ({ jwtToken, publicToken, userConnect, userId }) => (
   <div className="page-wrapper connect">
+    <Navbar />
     <h1>Connect</h1>
     <input
       type="image"
