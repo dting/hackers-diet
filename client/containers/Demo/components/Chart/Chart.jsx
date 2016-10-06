@@ -13,7 +13,7 @@ import { scaleTime } from 'd3-scale';
 import { timeDay } from 'd3-time';
 import moment from 'moment';
 
-/** Fill in gaps in time series data */
+/** Fill in gaps in time series data (https://github.com/recharts/recharts/issues/252) */
 const getTicksData = (data, ticks) => {
   if (!data || !data.length) { return []; }
 
@@ -37,20 +37,27 @@ const getTicks = (data) => {
 };
 
 /** Formatters **/
-const axDateFormat = time => moment(time).format('MMM DD');
-const ttDateFormat = time => moment(time).format('MMM DD, YYYY');
-const ttWeightFormat = weight => `${weight.toFixed(1)} kg`;
+const axDateFormatter = function axDateFormat(time) {
+  return moment(time).format('MMM DD');
+};
+const ttDateFormatter = function ttDateFormatter(time) {
+  return moment(time).format('MMM DD, YYYY');
+};
+const weightFormatter = function weightFormater(unit) {
+  return weight => `${weight.toFixed(1)} ${unit}`;
+};
 
 const Chart = (props) => {
   const ticksArr = getTicks(props.data);
   const completeData = getTicksData(props.data, ticksArr);
+  const unit = (completeData[0] || {}).unit || '';
   return (
     <ResponsiveContainer>
       <LineChart
         data={completeData}
-        margin={{ top: 20, right: 10, bottom: 20, left: 0 }}
+        margin={{ top: 15, right: 30, bottom: 30, left: 20 }}
       >
-        <Brush dataKey="name" height={25} stroke="#3186e4" />
+        <Brush dataKey="name" height={15} stroke="#3186e4" />
         <CartesianGrid strokeDasharray="3 3" />
         <Line
           dataKey="weight"
@@ -58,16 +65,20 @@ const Chart = (props) => {
           dot={{ stroke: '#3186e4', fill: '#3186e4' }}
           activeDot={{ r: 7 }}
         />
-        <Tooltip labelFormatter={ttDateFormat} formatter={ttWeightFormat} />
+        <Tooltip labelFormatter={ttDateFormatter} formatter={weightFormatter(unit)} />
         <XAxis
           dataKey="time"
+          minTickGap={-10}
+          padding={{ left: 15, right: 15 }}
           ticks={ticksArr}
           tickCount={ticksArr.length}
-          tickFormatter={axDateFormat}
+          tickFormatter={axDateFormatter}
         />
         <YAxis
           dataKey="weight"
           domain={['auto', 'auto']}
+          tick={{ dx: -5 }}
+          tickFormatter={weightFormatter(unit)}
         />
       </LineChart>
     </ResponsiveContainer>

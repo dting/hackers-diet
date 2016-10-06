@@ -1,0 +1,20 @@
+.weight-log {
+  display        : flex;
+  margin-bottom  : 15px;
+  padding        : 0 15px;
+  overflow       : auto;
+  flex-direction : column;
+
+  .row {
+    display    : flex;
+    min-height : 25px;
+
+    .cell {
+      display      : flex;
+      min-height   : 25px;
+      margin-right : 25px;
+      align-items  : center;
+      font-size    : 14px;
+    }
+  }
+}

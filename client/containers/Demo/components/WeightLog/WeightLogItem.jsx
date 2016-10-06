@@ -4,7 +4,7 @@ import moment from 'moment';
 const WeightLogItem = props => (
   <div className="row">
     <div className="cell">{moment(props.item.time).format('MMM DD, YYYY')}</div>
-    <div className="cell">{props.item.weight.toFixed(1)} {props.item.unit}</div>
+    <div className="cell">{`${props.item.weight.toFixed(1)} ${props.item.unit}`}</div>
   </div>
 );
 

@@ -51,11 +51,15 @@ class Demo extends Component {
         <div className="demo-content">
           <div className="side-panel">
             <h2 className="header">Weight Log</h2>
-            <WeightLog data={combinedData} />
+            <div className="log">
+              <WeightLog data={combinedData} />
+            </div>
           </div>
           <div className="main-panel">
             <h2 className="header">Chart</h2>
-            <Chart data={combinedData} />
+            <div className="chart">
+              <Chart data={combinedData} />
+            </div>
           </div>
         </div>
       </div>
