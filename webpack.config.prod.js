@@ -2,6 +2,7 @@ const autoprefixer = require('autoprefixer');
 const postcssImport = require('postcss-import');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -25,6 +26,7 @@ module.exports = {
     new ExtractTextPlugin('style.css', {
       allChunks: true,
     }),
+    new OptimizeCssAssetsPlugin(),
     new HtmlWebpackPlugin({
       template: './index.template.html',
     }),
