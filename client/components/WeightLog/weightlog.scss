@@ -1,10 +1,18 @@
 .weight-log {
   display        : flex;
-  margin-bottom  : 15px;
-  padding        : 0 15px;
-  overflow       : auto;
+  flex           : 1;
   flex-direction : column;
 
+  .rows {
+    display        : flex;
+    min-width      : 300px;
+    margin-bottom  : 15px;
+    padding        : 0 15px;
+    overflow       : auto;
+    flex-direction : column;
+  }
+
+  .header,
   .row {
     display    : flex;
     min-height : 25px;
@@ -15,6 +23,20 @@
       margin-right : 25px;
       align-items  : center;
       font-size    : 14px;
+
+      &.date {
+        flex : 2;
+      }
+
+      &.trend,
+      &.weight {
+        flex : 1;
+      }
     }
+  }
+
+  .header {
+    padding : 0 15px;
+    font-weight: bold;
   }
 }

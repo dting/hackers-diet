@@ -30,6 +30,14 @@ const combineByDate = (data) => {
   })).sort((a, b) => a.time - b.time);
 };
 
+const calculateTrend = (data) => {
+  let trend;
+  return data.map((item, index) => {
+    trend = index ? trend + (0.1 * (item.weight - trend)) : item.weight;
+    return { ...item, trend };
+  });
+};
+
 actions.getWeightReadings = function getWeightReadings(token = 'demo') {
   const controller = token === 'demo' ? 'demos' : 'users';
   return (dispatch) => {
@@ -37,7 +45,8 @@ actions.getWeightReadings = function getWeightReadings(token = 'demo') {
       .then(api.checkStatus)
       .then(api.parseJson)
       .then(reshape)
-      .then(combineByDate);
+      .then(combineByDate)
+      .then(calculateTrend);
 
     return dispatch({
       type: types.HUMANAPI_GET_WEIGHT_READINGS,

@@ -14,22 +14,10 @@
     display        : flex;
     overflow       : hidden;
     flex-direction : column;
-
-    .chart,
-    .log {
-      display        : flex;
-      flex           : 1;
-      flex-direction : column;
-    }
   }
 
   .main-panel {
     flex : 1;
-  }
-
-  .header {
-    margin  : 0;
-    padding : 15px;
   }
 }
 

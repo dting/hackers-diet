@@ -27,16 +27,10 @@ class Home extends Component {
         {!pending && !!weightReadings.length && (
           <div className="home-content">
             <div className="side-panel">
-              <h2 className="header">Weight Log</h2>
-              <div className="log">
-                <WeightLog data={this.props.weightReadings} />
-              </div>
+              <WeightLog data={this.props.weightReadings} />
             </div>
             <div className="main-panel">
-              <h2 className="header">Chart</h2>
-              <div className="chart">
-                <Chart data={this.props.weightReadings} />
-              </div>
+              <Chart data={this.props.weightReadings} />
             </div>
           </div>
         )}

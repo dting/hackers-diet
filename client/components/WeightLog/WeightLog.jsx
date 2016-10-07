@@ -4,7 +4,14 @@ import { WeightLogItem } from './';
 
 const WeightLog = ({ data }) => (
   <div className="weight-log">
-    {data.reverse().map(item => (<WeightLogItem key={item.id} item={item} />))}
+    <div className="header">
+      <div className="date cell">Date</div>
+      <div className="weight cell">Weight</div>
+      <div className="trend cell">Trend</div>
+    </div>
+    <div className="rows">
+      {data.reverse().map(item => (<WeightLogItem key={item.id} item={item} />))}
+    </div>
   </div>
 );
 

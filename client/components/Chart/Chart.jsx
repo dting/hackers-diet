@@ -26,6 +26,14 @@ const getTicksData = (data, ticks) => {
   return data.sort((a, b) => a.time - b.time);
 };
 
+const addMissingTrends = (data) => {
+  let trend;
+  return data.map((item) => {
+    trend = item.trend || trend;
+    return { ...item, trend };
+  });
+};
+
 const getTicks = (data) => {
   if (!data || !data.length) { return []; }
 
@@ -49,39 +57,48 @@ const weightFormatter = function weightFormater(unit) {
 
 const Chart = (props) => {
   const ticksArr = getTicks(props.data);
-  const completeData = getTicksData(props.data, ticksArr);
+  const completeData = addMissingTrends(getTicksData(props.data, ticksArr));
   const unit = (completeData[0] || {}).unit || '';
   return (
-    <ResponsiveContainer>
-      <LineChart
-        data={completeData}
-        margin={{ top: 15, right: 30, bottom: 30, left: 20 }}
-      >
-        <Brush dataKey="name" height={15} stroke="#3186e4" />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Line
-          dataKey="weight"
-          stroke="#3186e4"
-          dot={{ stroke: '#3186e4', fill: '#3186e4' }}
-          activeDot={{ r: 7 }}
-        />
-        <Tooltip labelFormatter={ttDateFormatter} formatter={weightFormatter(unit)} />
-        <XAxis
-          dataKey="time"
-          minTickGap={-10}
-          padding={{ left: 15, right: 15 }}
-          ticks={ticksArr}
-          tickCount={ticksArr.length}
-          tickFormatter={axDateFormatter}
-        />
-        <YAxis
-          dataKey="weight"
-          domain={['auto', 'auto']}
-          tick={{ dx: -5 }}
-          tickFormatter={weightFormatter(unit)}
-        />
-      </LineChart>
-    </ResponsiveContainer>
+    <div className="chart">
+      <ResponsiveContainer>
+        <LineChart
+          data={completeData}
+          margin={{ top: 15, right: 30, bottom: 30, left: 20 }}
+        >
+          <Brush dataKey="name" height={15} stroke="#3186e4" />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Line
+            dataKey="weight"
+            stroke="#3186e4"
+            dot={{ stroke: '#3186e4', fill: '#3186e4' }}
+            activeDot={{ r: 7 }}
+          />
+          <Line
+            dataKey="trend"
+            stroke="#00AB77"
+            dot={false}
+            activeDot={{ r: 5 }}
+            type="monotoneX"
+          />
+          <Tooltip labelFormatter={ttDateFormatter} formatter={weightFormatter(unit)} />
+          <XAxis
+            dataKey="time"
+            minTickGap={-10}
+            padding={{ left: 15, right: 15 }}
+            ticks={ticksArr}
+            tickCount={ticksArr.length}
+            tickFormatter={axDateFormatter}
+          />
+          <YAxis
+            dataKey="weight"
+            domain={['auto', 'auto']}
+            tick={{ dx: -5 }}
+            tickFormatter={weightFormatter(unit)}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 
