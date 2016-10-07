@@ -1,7 +1,7 @@
-@import "../node_modules/normalize.css/normalize.css",
-        "./styles/variables",
-        "./containers/containers",
-        "./components/components";
+@import "normalize.css";
+@import "./styles/variables";
+@import "./containers/containers";
+@import "./components/components";
 
 body {
   width       : 100vw;

@@ -1,4 +1,5 @@
 const autoprefixer = require('autoprefixer');
+const postcssImport = require('postcss-import');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
@@ -21,8 +22,8 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': `${process.env.NODE_ENV || 'development'}`,
-      'process.env.HUMAN_API_ID': `${process.env.HUMAN_API_ID || ''}`,
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.HUMAN_API_ID': JSON.stringify(process.env.HUMAN_API_ID || ''),
     }),
     new ExtractTextPlugin('style.css', {
       allChunks: true,
@@ -32,7 +33,7 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.css', '.scss'],
   },
   module: {
     loaders: [{
@@ -40,12 +41,14 @@ module.exports = {
       exclude: /node_modules/,
       loaders: ['babel-loader'],
     }, {
+      test: /\.css$/,
+      loaders: ['style', 'css'],
+    }, {
       test: /\.scss$/,
       loaders: [
         ExtractTextPlugin.extract('style'),
         'css?sourceMap',
         'postcss',
-        'resolve-url',
         'sass?sourceMap',
       ],
     }, {
@@ -56,5 +59,5 @@ module.exports = {
       loader: 'url-loader?limit=8192',
     }],
   },
-  postcss: () => [autoprefixer],
+  postcss: () => [postcssImport, autoprefixer],
 };

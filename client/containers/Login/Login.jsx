@@ -6,7 +6,7 @@ const Login = () => (
     <div className="heading">Human API & Hacker&apos;s Diet</div>
     <div className="actions">
       <a className="google-btn" href="/auth/google">
-        <span className="icon" />
+        <img className="icon" src={require('./g-normal.png')} alt={'google icon'} />
         <span className="buttonText">Google</span>
       </a>
       <Link className="demo-btn" to="/demo">
