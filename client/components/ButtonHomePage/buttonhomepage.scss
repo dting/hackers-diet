@@ -1,5 +1,5 @@
 .home-link {
-  color           : #3186e4;
+  color           : $blue;
   border-radius   : 20px;
   background      : none;
   outline         : none;
@@ -7,7 +7,7 @@
   text-transform  : uppercase;
 
   &:focus .home-btn {
-    box-shadow : 0 0 6px 2px #3186e4;
+    box-shadow : 0 0 6px 2px $blue;
   }
 }
 
@@ -16,7 +16,7 @@
   display         : flex;
   width           : 50px;
   height          : 50px;
-  border          : 3px solid #3186e4;
+  border          : 3px solid $blue;
   border-radius   : 50px;
   align-items     : center;
   justify-content : center;
@@ -30,7 +30,7 @@
     margin          : 15px 6px 3px;
     border          : 3px solid;
     border-top      : none;
-    border-color    : #3186e4;
+    border-color    : $blue;
     align-items     : center;
     justify-content : center;
     transition      : all 0.3s linear;
@@ -74,22 +74,22 @@
 
   &:hover {
     width            : 150px;
-    background-color : #3186e4;
+    background-color : $blue;
 
     .home-btn {
       &_icon {
-        border-color : #ffffff;
+        border-color : $white;
         transform    : translateX(10px);
 
         &::after,
         &::before {
-          border-color : #ffffff;
+          border-color : $white;
         }
       }
 
       &_text {
         width   : 100px;
-        color   : #ffffff;
+        color   : $white;
         opacity : 1;
       }
     }

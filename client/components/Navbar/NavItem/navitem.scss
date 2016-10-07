@@ -10,7 +10,7 @@
 
   &.active,
   &:hover {
-    color : #3186e4;
+    color : $blue;
   }
 
   &::after {
@@ -21,7 +21,7 @@
     left             : 0;
     height           : 4px;
     opacity          : 0;
-    background-color : #3186e4;
+    background-color : $blue;
     transition       : all 0.2s linear;
   }
 

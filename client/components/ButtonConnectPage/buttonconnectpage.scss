@@ -1,5 +1,5 @@
 .connect-link {
-  color           : #3186e4;
+  color           : $blue;
   border-radius   : 20px;
   background      : none;
   outline         : none;
@@ -7,7 +7,7 @@
   text-transform  : uppercase;
 
   &:focus .connect-btn {
-    box-shadow : 0 0 6px 2px #3186e4;
+    box-shadow : 0 0 6px 2px $blue;
   }
 }
 
@@ -16,9 +16,9 @@
   display          : flex;
   width            : 50px;
   height           : 50px;
-  border           : 3px solid #3186e4;
+  border           : 3px solid $blue;
   border-radius    : 50px;
-  background-color : #ffffff;
+  background-color : $white;
   align-items      : center;
   justify-content  : center;
   transition       : all 0.3s linear;
@@ -29,7 +29,7 @@
     width            : 16px;
     height           : 3px;
     margin           : 16px 9px;
-    background-color : #3186e4;
+    background-color : $blue;
     align-items      : center;
     justify-content  : center;
     transition       : all 0.3s linear;
@@ -66,18 +66,18 @@
 
   &:hover {
     width            : 150px;
-    background-color : #3186e4;
+    background-color : $blue;
 
     .connect-btn {
       &_icon {
-        color            : #ffffff;
-        background-color : #ffffff;
+        color            : $white;
+        background-color : $white;
         transform        : rotate(-45deg);
       }
 
       &_text {
         width   : 100px;
-        color   : #ffffff;
+        color   : $white;
         opacity : 1;
       }
     }
