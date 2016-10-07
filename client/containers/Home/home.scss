@@ -1,9 +1,57 @@
 .home {
   display        : flex;
-  align-items    : center;
+  flex           : 1;
   flex-direction : column;
 
   .connect-info {
+    display        : flex;
+    padding        : 15px;
+    align-items    : center;
+    flex-direction : column;
+  }
+}
+
+.home-content {
+  display     : flex;
+  align-items : stretch;
+  flex        : 1;
+
+  .main-panel,
+  .side-panel {
+    display        : flex;
+    overflow       : hidden;
+    flex-direction : column;
+
+    .chart,
+    .log {
+      display        : flex;
+      flex           : 1;
+      flex-direction : column;
+    }
+  }
+
+  .main-panel {
+    flex : 1;
+  }
+
+  .header {
+    margin  : 0;
     padding : 15px;
+  }
+}
+
+@media only screen
+       and (max-width : 667px) {
+  .home-content {
+    flex-direction : column;
+
+    .main-panel {
+      min-height : 300px;
+      order      : 1;
+    }
+
+    .side-panel {
+      order : 2;
+    }
   }
 }

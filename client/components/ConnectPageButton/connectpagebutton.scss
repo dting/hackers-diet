@@ -1,0 +1,85 @@
+.connect-link {
+  color           : #3186e4;
+  border-radius   : 20px;
+  background      : none;
+  outline         : none;
+  text-decoration : none;
+  text-transform  : uppercase;
+
+  &:focus .chain {
+    box-shadow : 0 0 6px 2px #3186e4;
+  }
+}
+
+.connect-btn {
+  /* Inspired by: https://saeedalipoor.github.io/icono */
+  display          : flex;
+  width            : 50px;
+  height           : 50px;
+  border           : 3px solid #3186e4;
+  border-radius    : 50px;
+  background-color : #ffffff;
+  align-items      : center;
+  justify-content  : center;
+  transition       : all 0.3s linear;
+
+  &_icon {
+    display          : flex;
+    position         : relative;
+    width            : 16px;
+    height           : 3px;
+    margin           : 16px 9px;
+    background-color : #3186e4;
+    align-items      : center;
+    justify-content  : center;
+    transition       : all 0.3s linear;
+
+    &::after,
+    &::before {
+      content       : '';
+      position      : absolute;
+      top           : 50%;
+      width         : 12px;
+      height        : 8px;
+      border        : 3px solid;
+      border-radius : 6px;
+      transform     : translateY(-50%);
+    }
+
+    &::before {
+      right : -10px;
+    }
+
+    &::after {
+      left : -10px;
+    }
+  }
+
+  &_text {
+    display         : flex;
+    width           : 0;
+    opacity         : 0;
+    overflow        : hidden;
+    justify-content : center;
+    transition      : all 0.3s linear;
+  }
+
+  &:hover {
+    width            : 150px;
+    background-color : #3186e4;
+
+    .connect-btn {
+      &_icon {
+        color            : #ffffff;
+        background-color : #ffffff;
+        transform        : rotate(-45deg);
+      }
+
+      &_text {
+        width   : 100px;
+        color   : #ffffff;
+        opacity : 1;
+      }
+    }
+  }
+}

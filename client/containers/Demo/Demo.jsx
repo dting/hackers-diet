@@ -1,46 +1,21 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 
-import { Navbar, NavItem } from '../../components';
-import { Chart, WeightLog } from './components';
-import { actions } from './';
-
-const average = weights => weights.reduce((a, b) => a + b) / weights.length;
-
-const reshape = data => data.map(e => ({
-  time: new Date(e.timestamp).getTime(),
-  weight: e.value,
-  unit: e.unit,
-}));
-
-const combineByDate = (data) => {
-  if (!data || !data.length) { return []; }
-
-  const dates = Object.create(null);
-  data.forEach((item) => {
-    const key = moment(item.time).startOf('day');
-    if (!(key in dates)) dates[key] = [];
-    dates[key].push(item);
-  });
-  return Object.keys(dates).map((key, i) => ({
-    time: new Date(key).getTime(),
-    weight: average(dates[key].map(item => item.weight)),
-    unit: dates[key][0].unit,
-    id: i,
-  })).sort((a, b) => a.time - b.time);
-};
+import { Chart, Navbar, NavItem, WeightLog } from '../../components';
+import { actions } from '../../modules/humanapi';
 
 class Demo extends Component {
   componentDidMount() {
-    this.props.weight();
+    this.props.getWeightReadings();
+  }
+
+  componentWillUnmount() {
+    this.props.clearWeightReadings();
   }
 
   render() {
-    const data = reshape(this.props.demoData);
-    const combinedData = combineByDate(data);
     return (
       <div className="demo fade-in">
         <Navbar path={this.props.location.pathname}>
@@ -52,13 +27,13 @@ class Demo extends Component {
           <div className="side-panel">
             <h2 className="header">Weight Log</h2>
             <div className="log">
-              <WeightLog data={combinedData} />
+              <WeightLog data={this.props.weightReadings} />
             </div>
           </div>
           <div className="main-panel">
             <h2 className="header">Chart</h2>
             <div className="chart">
-              <Chart data={combinedData} />
+              <Chart data={this.props.weightReadings} />
             </div>
           </div>
         </div>
@@ -68,21 +43,21 @@ class Demo extends Component {
 }
 
 Demo.propTypes = {
-  weight: PropTypes.func,
-  demoData: PropTypes.arrayOf(PropTypes.shape({
-    weight: PropTypes.number,
-  })),
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }),
+  weightReadings: PropTypes.arrayOf(PropTypes.shape({})),
+  getWeightReadings: PropTypes.func.isRequired,
+  clearWeightReadings: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  demoData: state.demo.data,
+  weightReadings: state.humanapi.weightReadings,
 });
 
 const mapDispatchToProps = dispatch => ({
-  weight: bindActionCreators(actions.weight, dispatch),
+  getWeightReadings: bindActionCreators(actions.getWeightReadings, dispatch),
+  clearWeightReadings: bindActionCreators(actions.clearWeightReadings, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Demo);

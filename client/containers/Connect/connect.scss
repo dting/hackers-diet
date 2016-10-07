@@ -2,13 +2,13 @@
   display        : flex;
   align-items    : center;
   flex-direction : column;
-}
 
-.connect-btn {
-  border-radius : 5px;
-  outline       : none;
+  .connect-img-btn {
+    border-radius : 5px;
+    outline       : none;
 
-  &:focus {
-    box-shadow : 0 0 6px 2px #3186e4;
+    &:focus {
+      box-shadow : 0 0 6px 2px #3186e4;
+    }
   }
 }

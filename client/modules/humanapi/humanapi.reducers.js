@@ -1,26 +1,31 @@
 import { types } from './';
 
 const initialState = {
-  data: [],
+  weightReadings: [],
+  pending: false,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case types.DEMO_WEIGHT_PENDING:
+    case types.HUMANAPI_GET_WEIGHT_READINGS_PENDING:
       return {
         ...state,
         pending: true,
       };
-    case types.DEMO_WEIGHT_FULFILLED:
+    case types.HUMANAPI_GET_WEIGHT_READINGS_FULFILLED:
       return {
         ...state,
-        data: action.payload,
+        weightReadings: action.payload,
         pending: false,
       };
-    case types.DEMO_WEIGHT_REJECTED:
+    case types.HUMANAPI_GET_WEIGHT_READINGS_REJECTED:
+      return {
+        ...state,
+        pending: false,
+      };
+    case types.HUMANAPI_CLEAR_WEIGHT_READINGS:
       return {
         ...initialState,
-        pending: false,
       };
     default:
       return state;
