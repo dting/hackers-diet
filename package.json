@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server/app.js",
     "postinstall": "webpack --config ./webpack.config.prod.js --progress --colors",
+    "dev": "nf start -j Procfile.dev",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

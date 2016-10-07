@@ -19,7 +19,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': 'production',
-      'process.env.HUMAN_API_ID': process.env.HUMAN_API_ID,
+      'process.env.HUMAN_API_ID': `${process.env.HUMAN_API_ID || ''}`,
     }),
     new ExtractTextPlugin('style.css', {
       allChunks: true,

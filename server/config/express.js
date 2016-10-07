@@ -13,6 +13,7 @@ module.exports = function configExpress(app) {
   app.set('env', config.env);
   app.set('port', config.port);
   app.set('ip', config.ip);
+  app.set('view engine', 'ejs');
 
   if (app.get('env') === 'development') {
     app.set('tempPath', path.join(config.root, '.tmp'));
