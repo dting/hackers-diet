@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import React from 'react';
 
-const ConnectPageButton = () => (
+const ButtonConnectPage = () => (
   <Link className="connect-link" to={'/connect'}>
     <div className="connect-btn">
       <div className="connect-btn_icon" />
@@ -12,4 +12,4 @@ const ConnectPageButton = () => (
   </Link>
 );
 
-export default ConnectPageButton;
+export default ButtonConnectPage;

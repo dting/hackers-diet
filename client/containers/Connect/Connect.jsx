@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
+import { ButtonHomePage } from '../../components';
 import { actions as userActions } from '../../modules/user';
 
 const connectHandler = function connectHandler(props) {
@@ -28,13 +29,14 @@ const connectHandler = function connectHandler(props) {
 
 const Connect = props => (
   <div className="connect fade-in">
-    <h1>Connect</h1>
     <input
       className="connect-img-btn"
       onClick={connectHandler(props)}
       src={require('./blue.png')}
       type="image"
     />
+    <p>Manage Human API connections...</p>
+    <ButtonHomePage />
   </div>
 );
 

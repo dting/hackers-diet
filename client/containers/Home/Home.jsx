@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 
-import { Chart, ConnectPageButton, WeightLog } from '../../components';
+import { ButtonConnectPage, Chart, WeightLog } from '../../components';
 import { actions } from '../../modules/humanapi';
 
 class Home extends Component {
@@ -21,10 +21,10 @@ class Home extends Component {
         {!pending && !weightReadings.length && (
           <div className="connect-info">
             <p>Add a Human API connection with weight data...</p>
-            <ConnectPageButton />
+            <ButtonConnectPage />
           </div>
         )}
-        {!pending && weightReadings.length && (
+        {!pending && !!weightReadings.length && (
           <div className="home-content">
             <div className="side-panel">
               <h2 className="header">Weight Log</h2>
