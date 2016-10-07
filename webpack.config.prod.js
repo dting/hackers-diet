@@ -40,10 +40,8 @@ module.exports = {
       test: /\.scss$/,
       loaders: [
         ExtractTextPlugin.extract('style'),
-        'css?sourceMap',
         'postcss',
         'resolve-url',
-        'sass?sourceMap',
       ],
     }, {
       test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
