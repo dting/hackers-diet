@@ -2,4 +2,10 @@
   display        : flex;
   flex           : 1;
   flex-direction : column;
+
+  .recharts-brush-texts,
+  .recharts-cartesian-axis-tick,
+  .recharts-legend-item-text {
+    font-size : 12px;
+  }
 }

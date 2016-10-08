@@ -8,11 +8,11 @@ import { actions } from '../../modules/humanapi';
 
 class Demo extends Component {
   componentDidMount() {
-    this.props.getWeightReadings();
+    this.props.actions.getWeightReadings();
   }
 
   componentWillUnmount() {
-    this.props.clearWeightReadings();
+    this.props.actions.clearWeightReadings();
   }
 
   render() {
@@ -25,11 +25,11 @@ class Demo extends Component {
         </Navbar>
         <div className="demo-content">
           <div className="side-panel">
-            <WeightLog data={this.props.weightReadings} />
+            <WeightLog {...this.props} />
           </div>
           <div className="main-panel">
             <div className="chart">
-              <Chart data={this.props.weightReadings} />
+              <Chart {...this.props} />
             </div>
           </div>
         </div>
@@ -42,18 +42,18 @@ Demo.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }),
-  weightReadings: PropTypes.arrayOf(PropTypes.shape({})),
-  getWeightReadings: PropTypes.func.isRequired,
-  clearWeightReadings: PropTypes.func.isRequired,
+  actions: PropTypes.shape({
+    clearWeightReadings: PropTypes.func.isRequired,
+    getWeightReadings: PropTypes.func.isRequired,
+  }),
 };
 
 const mapStateToProps = state => ({
-  weightReadings: state.humanapi.weightReadings,
+  ...state.humanapi,
 });
 
 const mapDispatchToProps = dispatch => ({
-  getWeightReadings: bindActionCreators(actions.getWeightReadings, dispatch),
-  clearWeightReadings: bindActionCreators(actions.clearWeightReadings, dispatch),
+  actions: bindActionCreators(actions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Demo);

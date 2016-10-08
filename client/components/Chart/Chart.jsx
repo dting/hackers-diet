@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import {
   Brush,
-  CartesianGrid,
+  Legend,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -12,29 +12,41 @@ import {
 
 import { spanGaps, formatters } from '../../modules/util/util.chart';
 
-const Chart = (props) => {
-  const { data, ticks, unit } = spanGaps(props.data);
+const Chart = ({ weightReadings, unit }) => {
+  const { data, ticks } = spanGaps(weightReadings);
   return (
     <div className="chart">
       <ResponsiveContainer>
         <LineChart
           data={data}
-          margin={{ top: 15, right: 30, bottom: 30, left: 20 }}
+          margin={{ top: 15, right: 15, bottom: 15, left: 15 }}
         >
-          <Brush dataKey="name" height={15} stroke="#3186e4" />
-          <CartesianGrid strokeDasharray="3 3" />
+          <Brush
+            dataKey="time"
+            height={15}
+            stroke="#3186e4"
+            tickFormatter={formatters.axisDate}
+          />
+          <Legend
+            align={'right'}
+            height={20}
+            layout={'vertical'}
+            verticalAlign="top"
+          />
           <Line
-            activeDot={{ r: 7 }}
+            activeDot={{ stroke: '#3186e4', fill: 'none', r: 6 }}
             dataKey="weight"
             dot={{ stroke: '#3186e4', fill: '#3186e4' }}
             stroke="#3186e4"
+            strokeDasharray="0 1"
           />
           <Line
-            activeDot={{ r: 5 }}
+            activeDot={{ stroke: '#00AB77', fill: 'none', r: 3 }}
+            connectNulls
             dataKey="trend"
             dot={false}
             stroke="#00AB77"
-            type="monotoneX"
+            type="linear"
           />
           <Tooltip
             formatter={formatters.weight(unit)}
@@ -42,8 +54,8 @@ const Chart = (props) => {
           />
           <XAxis
             dataKey="time"
-            minTickGap={-10}
-            padding={{ left: 15, right: 15 }}
+            minTickGap={10}
+            padding={{ left: 20, right: 20 }}
             tickCount={ticks.length}
             tickFormatter={formatters.axisDate}
             ticks={ticks}
@@ -51,6 +63,7 @@ const Chart = (props) => {
           <YAxis
             dataKey="weight"
             domain={['auto', 'auto']}
+            padding={{ top: 20, bottom: 20 }}
             tick={{ dx: -5 }}
             tickFormatter={formatters.weight(unit)}
           />
@@ -61,7 +74,8 @@ const Chart = (props) => {
 };
 
 Chart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})),
+  weightReadings: PropTypes.arrayOf(PropTypes.shape({})),
+  unit: PropTypes.string,
 };
 
 export default Chart;

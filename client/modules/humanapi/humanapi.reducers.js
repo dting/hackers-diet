@@ -1,8 +1,9 @@
 import { types } from './';
 
 const initialState = {
-  weightReadings: [],
   pending: false,
+  unit: null,
+  weightReadings: [],
 };
 
 export default function (state = initialState, action) {
@@ -15,7 +16,7 @@ export default function (state = initialState, action) {
     case types.HUMANAPI_GET_WEIGHT_READINGS_FULFILLED:
       return {
         ...state,
-        weightReadings: action.payload,
+        ...action.payload,
         pending: false,
       };
     case types.HUMANAPI_GET_WEIGHT_READINGS_REJECTED:
@@ -26,6 +27,11 @@ export default function (state = initialState, action) {
     case types.HUMANAPI_CLEAR_WEIGHT_READINGS:
       return {
         ...initialState,
+      };
+    case types.HUMANAPI_TOGGLE_UNITS:
+      return {
+        ...state,
+        ...action.data,
       };
     default:
       return state;

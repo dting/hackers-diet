@@ -3,20 +3,12 @@ import { timeDay } from 'd3-time';
 import moment from 'moment';
 
 /** Fill in gaps in time series data (https://github.com/recharts/recharts/issues/252) */
-const getTicksData = (data, ticks) => {
+const filledData = function filledData(data, ticks) {
   const dataMap = new Map(data.map(i => [i.time, i]));
-  let trend;
-  ticks.forEach((item) => {
-    if (dataMap.has(item)) {
-      trend = dataMap.get(item).trend || trend;
-    } else {
-      data.push({ time: item, trend });
-    }
-  });
-  return data.sort((a, b) => a.time - b.time);
+  return ticks.map(item => dataMap.get(item) || { time: item });
 };
 
-const getTicks = (data) => {
+const getTicks = function getTicks(data) {
   if (!data || !data.length) { return []; }
 
   const domain = [new Date(data[0].time), new Date(data[data.length - 1].time)];
@@ -26,11 +18,9 @@ const getTicks = (data) => {
   return ticks.map(entry => +entry);
 };
 
-export const spanGaps = function spanGaps(rawData) {
-  const ticks = getTicks(rawData);
-  const data = getTicksData(rawData, ticks);
-  const unit = (data[0] || {}).unit || '';
-  return { ticks, data, unit };
+export const spanGaps = function spanGaps(readings) {
+  const ticks = getTicks(readings);
+  return { ticks, data: filledData(readings, ticks) };
 };
 
 export const formatters = {

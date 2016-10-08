@@ -6,12 +6,12 @@ import { ButtonConnectPage, Chart, WeightLog } from '../../components';
 import { actions } from '../../modules/humanapi';
 
 class Home extends Component {
-  componentWillMount() {
-    this.props.getWeightReadings(this.props.jwtToken);
+  componentDidMount() {
+    this.props.actions.getWeightReadings(this.props.jwtToken);
   }
 
   componentWillUnmount() {
-    this.props.clearWeightReadings();
+    this.props.actions.clearWeightReadings();
   }
 
   render() {
@@ -27,10 +27,10 @@ class Home extends Component {
         {!pending && !!weightReadings.length && (
           <div className="home-content">
             <div className="side-panel">
-              <WeightLog data={this.props.weightReadings} />
+              <WeightLog {...this.props} />
             </div>
             <div className="main-panel">
-              <Chart data={this.props.weightReadings} />
+              <Chart {...this.props} />
             </div>
           </div>
         )}
@@ -40,8 +40,10 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  clearWeightReadings: PropTypes.func.isRequired,
-  getWeightReadings: PropTypes.func.isRequired,
+  actions: PropTypes.shape({
+    clearWeightReadings: PropTypes.func.isRequired,
+    getWeightReadings: PropTypes.func.isRequired,
+  }),
   jwtToken: PropTypes.string.isRequired,
   pending: PropTypes.bool.isRequired,
   weightReadings: PropTypes.arrayOf(PropTypes.shape({})),
@@ -49,13 +51,11 @@ Home.propTypes = {
 
 const mapStateToProps = state => ({
   jwtToken: state.auth.token,
-  pending: state.humanapi.pending,
-  weightReadings: state.humanapi.weightReadings,
+  ...state.humanapi,
 });
 
 const mapDispatchToProps = dispatch => ({
-  clearWeightReadings: bindActionCreators(actions.clearWeightReadings, dispatch),
-  getWeightReadings: bindActionCreators(actions.getWeightReadings, dispatch),
+  actions: bindActionCreators(actions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

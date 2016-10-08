@@ -25,6 +25,7 @@
   "homepage": "https://github.com/dting/hackers-diet#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "cors": "^2.8.1",
     "d3-scale": "^1.0.3",
