@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 
 import { WeightLogItem } from './';
 
-const WeightLog = ({ actions, unit, weightReadings }) => (
+const WeightLog = ({ actions: { toggleUnits }, unit, weights }) => (
   <div className="weight-log">
     <div className="unit-toggle">
       kg
@@ -12,7 +12,7 @@ const WeightLog = ({ actions, unit, weightReadings }) => (
           'unit-toggle-btn',
           { [`${unit}`]: true }
         )}
-        onClick={actions.toggleUnits}
+        onClick={toggleUnits}
       />
       lbs
     </div>
@@ -22,8 +22,8 @@ const WeightLog = ({ actions, unit, weightReadings }) => (
       <div className="trend cell">Trend</div>
     </div>
     <div className="rows">
-      {[...weightReadings].reverse().map((reading, idx) => (
-        <WeightLogItem key={idx} item={reading} unit={unit} />
+      {[...weights].reverse().map((weight, idx) => (
+        <WeightLogItem key={idx} item={weight} unit={unit} />
       ))}
     </div>
   </div>
@@ -32,7 +32,7 @@ const WeightLog = ({ actions, unit, weightReadings }) => (
 WeightLog.propTypes = {
   actions: PropTypes.shape({}),
   unit: PropTypes.string,
-  weightReadings: PropTypes.arrayOf(PropTypes.shape({})),
+  weights: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 export default WeightLog;

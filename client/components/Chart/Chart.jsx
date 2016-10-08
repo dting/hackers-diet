@@ -12,8 +12,8 @@ import {
 
 import { spanGaps, formatters } from '../../modules/util/util.chart';
 
-const Chart = ({ weightReadings, unit }) => {
-  const { data, ticks } = spanGaps(weightReadings);
+const Chart = ({ weights, unit }) => {
+  const { data, ticks } = spanGaps(weights);
   return (
     <div className="chart">
       <ResponsiveContainer>
@@ -74,7 +74,7 @@ const Chart = ({ weightReadings, unit }) => {
 };
 
 Chart.propTypes = {
-  weightReadings: PropTypes.arrayOf(PropTypes.shape({})),
+  weights: PropTypes.arrayOf(PropTypes.shape({})),
   unit: PropTypes.string,
 };
 

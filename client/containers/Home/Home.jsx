@@ -7,24 +7,24 @@ import { actions } from '../../modules/humanapi';
 
 class Home extends Component {
   componentDidMount() {
-    this.props.actions.getWeightReadings(this.props.jwtToken);
+    this.props.actions.getWeights(this.props.jwtToken);
   }
 
   componentWillUnmount() {
-    this.props.actions.clearWeightReadings();
+    this.props.actions.clearWeights();
   }
 
   render() {
-    const { pending, weightReadings } = this.props;
+    const { pending, weights } = this.props;
     return (
       <div className="home fade-in">
-        {!pending && !weightReadings.length && (
+        {!pending && !weights.length && (
           <div className="connect-info">
             <p>Add a Human API connection with weight data...</p>
             <ButtonConnectPage />
           </div>
         )}
-        {!pending && !!weightReadings.length && (
+        {!pending && !!weights.length && (
           <div className="home-content">
             <div className="side-panel">
               <WeightLog {...this.props} />
@@ -41,12 +41,12 @@ class Home extends Component {
 
 Home.propTypes = {
   actions: PropTypes.shape({
-    clearWeightReadings: PropTypes.func.isRequired,
-    getWeightReadings: PropTypes.func.isRequired,
+    clearWeights: PropTypes.func.isRequired,
+    getWeights: PropTypes.func.isRequired,
   }),
   jwtToken: PropTypes.string.isRequired,
   pending: PropTypes.bool.isRequired,
-  weightReadings: PropTypes.arrayOf(PropTypes.shape({})),
+  weights: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 const mapStateToProps = state => ({

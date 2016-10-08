@@ -8,11 +8,11 @@ import { actions } from '../../modules/humanapi';
 
 class Demo extends Component {
   componentDidMount() {
-    this.props.actions.getWeightReadings();
+    this.props.actions.getWeights();
   }
 
   componentWillUnmount() {
-    this.props.actions.clearWeightReadings();
+    this.props.actions.clearWeights();
   }
 
   render() {
@@ -43,8 +43,8 @@ Demo.propTypes = {
     pathname: PropTypes.string,
   }),
   actions: PropTypes.shape({
-    clearWeightReadings: PropTypes.func.isRequired,
-    getWeightReadings: PropTypes.func.isRequired,
+    clearWeights: PropTypes.func.isRequired,
+    getWeights: PropTypes.func.isRequired,
   }),
 };
 

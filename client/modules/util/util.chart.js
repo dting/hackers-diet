@@ -18,9 +18,9 @@ const getTicks = function getTicks(data) {
   return ticks.map(entry => +entry);
 };
 
-export const spanGaps = function spanGaps(readings) {
-  const ticks = getTicks(readings);
-  return { ticks, data: filledData(readings, ticks) };
+export const spanGaps = function spanGaps(weights) {
+  const ticks = getTicks(weights);
+  return { ticks, data: filledData(weights, ticks) };
 };
 
 export const formatters = {

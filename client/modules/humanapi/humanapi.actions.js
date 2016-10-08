@@ -7,32 +7,31 @@ const actions = {};
 
 const average = weights => weights.reduce((a, b) => a + b) / weights.length;
 
-const combineByDate = (data) => {
+const combineByDate = function combineByDate(data) {
   if (!data || !data.length) { return {}; }
 
-  const dataMap = new Map();
+  const grouped = new Map();
   const unit = data[0].unit;
+
   data.reverse().forEach((item) => {
     const time = new Date(moment(item.timestamp).startOf('day')).getTime();
-    if (!dataMap.has(time)) {
-      dataMap.set(time, { readings: [item], time });
-    } else {
-      dataMap.get(time).readings.push(item);
+    if (!grouped.has(time)) {
+      grouped.set(time, { weights: [], time });
     }
+    grouped.get(time).weights.push(item);
   });
 
   let trend;
-  const weightReadings = [...dataMap.values()].map((item) => {
-    const { readings } = item;
-    const weight = average(readings.map(reading => reading.value));
+  const weights = [...grouped.values()].map((item) => {
+    const weight = average(item.weights.map(e => e.value));
     trend = trend ? trend + (0.1 * (weight - trend)) : weight;
     return { ...item, weight, trend };
   });
 
-  return { weightReadings, unit };
+  return { weights, unit };
 };
 
-actions.getWeightReadings = function getWeightReadings(token = 'demo') {
+actions.getWeights = function getWeights(token = 'demo') {
   const controller = token === 'demo' ? 'demos' : 'users';
   return (dispatch) => {
     const promise = fetch(`/api/${controller}/weight`, api.jsonGetOptions(token))
@@ -41,31 +40,31 @@ actions.getWeightReadings = function getWeightReadings(token = 'demo') {
       .then(combineByDate);
 
     return dispatch({
-      type: types.HUMANAPI_GET_WEIGHT_READINGS,
+      type: types.HUMANAPI_GET_WEIGHTS,
       payload: promise,
     });
   };
 };
 
-actions.clearWeightReadings = function clearWeightReadings() {
+actions.clearWeights = function clearWeights() {
   return {
-    type: types.HUMANAPI_CLEAR_WEIGHT_READINGS,
+    type: types.HUMANAPI_CLEAR_WEIGHTS,
   };
 };
 
 const convertTo = {
   lbs(data) {
-    return data.map((reading) => {
-      const weight = +reading.weight * 2.20462262185;
-      const trend = +reading.trend * 2.20462262185;
-      return { ...reading, weight, trend };
+    return data.map((entry) => {
+      const weight = entry.weight * 2.20462262185;
+      const trend = entry.trend * 2.20462262185;
+      return { ...entry, weight, trend };
     });
   },
   kg(data) {
-    return data.map((reading) => {
-      const weight = reading.weight * 0.45359237;
-      const trend = reading.trend * 0.45359237;
-      return { ...reading, weight, trend };
+    return data.map((entry) => {
+      const weight = entry.weight * 0.45359237;
+      const trend = entry.trend * 0.45359237;
+      return { ...entry, weight, trend };
     });
   },
 };
@@ -74,10 +73,10 @@ actions.toggleUnits = function toggleUnits() {
   return (dispatch, getState) => {
     const { humanapi } = getState();
     const unit = humanapi.unit === 'kg' ? 'lbs' : 'kg';
-    const weightReadings = convertTo[unit](humanapi.weightReadings);
+    const weights = convertTo[unit](humanapi.weights);
     return dispatch({
       type: types.HUMANAPI_TOGGLE_UNITS,
-      data: { unit, weightReadings },
+      data: { unit, weights },
     });
   };
 };
