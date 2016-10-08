@@ -20,7 +20,7 @@
   border-radius   : 50px;
   align-items     : center;
   justify-content : center;
-  transition      : all 0.3s linear;
+  transition      : all 0.3s;
 
   &_icon {
     display         : flex;
@@ -33,7 +33,7 @@
     border-color    : $blue;
     align-items     : center;
     justify-content : center;
-    transition      : all 0.3s linear;
+    transition      : all 0.3s;
 
     &::after,
     &::before {
@@ -41,7 +41,7 @@
       position      : absolute;
       border        : 3px solid;
       border-bottom : none;
-      transition    : all 0.3s linear;
+      transition    : all 0.3s;
     }
 
     &::before {
@@ -69,7 +69,7 @@
     opacity         : 0;
     overflow        : hidden;
     justify-content : center;
-    transition      : all 0.3s linear;
+    transition      : all 0.3s;
   }
 
   &:hover {
