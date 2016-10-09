@@ -14,12 +14,14 @@ Demo @ [https://hackersdiet.herokuapp.com](https://hackersdiet.herokuapp.com)
 * [Human API](https://www.humanapi.co)
 
 ---
-* [Node.js](https://nodejs.org/)  
-* [Express](https://expressjs.com/)  
-  - [Passport Google OAuth 2.0](https://github.com/jaredhanson/passport-google-oauth2)<sup>[[1](http://passportjs.org/)]</sup>
+* [Node.js](https://nodejs.org/)
+* [Express](https://expressjs.com/)
+  - [Helmet](https://github.com/helmetjs/helmet)
   - [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)<sup>[[1](https://jwt.io/)]</sup>
+  - [Passport Google OAuth 2.0](https://github.com/jaredhanson/passport-google-oauth2)<sup>[[1](http://passportjs.org/)]</sup>
 * [Sequelize](http://docs.sequelizejs.com/)
-  - [PostgreSQL](https://www.postgresql.org/)  
+  - [PostgreSQL](https://www.postgresql.org/)
+* [Fetch](https://github.com/bitinn/node-fetch)
 
 ---
 * [React](https://facebook.github.io/react/)  

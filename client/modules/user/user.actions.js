@@ -5,7 +5,8 @@ const actions = {};
 
 actions.connect = function connect(token, data) {
   return (dispatch) => {
-    const promise = fetch('/api/users/connect', api.jsonPostOptions(token, data))
+    const promise = fetch(`${process.env.DOMAIN || ''}/api/users/connect`,
+      api.jsonPostOptions(token, data))
       .then(api.checkStatus)
       .then(api.parseJson);
 
@@ -18,7 +19,8 @@ actions.connect = function connect(token, data) {
 
 actions.me = function me(token) {
   return (dispatch) => {
-    const promise = fetch('/api/users/me', api.jsonGetOptions(token))
+    const promise = fetch(`${process.env.DOMAIN || ''}/api/users/me`,
+      api.jsonGetOptions(token))
       .then(api.checkStatus)
       .then(api.parseJson);
 

@@ -34,7 +34,8 @@ const combineByDate = function combineByDate(data) {
 actions.getWeights = function getWeights(token = 'demo') {
   const controller = token === 'demo' ? 'demos' : 'users';
   return (dispatch) => {
-    const promise = fetch(`/api/${controller}/weight`, api.jsonGetOptions(token))
+    const promise = fetch(`${process.env.DOMAIN || ''}/api/${controller}/weight`,
+      api.jsonGetOptions(token))
       .then(api.checkStatus)
       .then(api.parseJson)
       .then(combineByDate);
