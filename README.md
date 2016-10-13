@@ -8,7 +8,7 @@
 
 Calculate personal weight trends by connecting services in Human API Data Network. The normalized data is used to calculate a simple moving average as described by [The Hacker's Diet](https://www.fourmilab.ch/hackdiet/).
 
-Demo @ [https://hackersdiet.herokuapp.com](https://hackersdiet.herokuapp.com)
+Demo @ [https://hackersdiet.codedting.com](https://hackersdiet.codedting.com)
 
 ---
 * [Human API](https://www.humanapi.co)
